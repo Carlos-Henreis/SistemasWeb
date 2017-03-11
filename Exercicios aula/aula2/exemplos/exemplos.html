@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Java Script</title>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+		function isPrime(n) {
+			// Assume: n > 0 e n é inteiro
+			// Retorna: true se n é primo
+			if (n < 2) {
+				return false;
+			}
+			else if (n == 2) {
+				return true;
+			}
+			else {
+				for (var i = 2; i <= Math.sqrt(n); i++) {
+					if (n % i == 0) {
+					return false;
+					}
+				}
+				return true;
+			}
+		} 
+
+	</script>
+</head>
+<body>
+	<p>O texto a seguir não é estática</p>
+	<script type="text/javascript">
+		//Demontração de saida de texto
+		document.write("<p>Hallo Word!</p>");
+	</script>
+	<p>Tipagem em java Script</p>
+	<script type="text/javascript">
+		var c, l;
+		c = 1000;
+		l = -34.09;
+		document.write("c="+c+"<br>"+
+					   "l="+l+"<br>");
+		l = "Leticia";
+		c = "Carlos";
+		document.write("c="+c+"<br>"+
+					   "l="+l+"<br>");
+	</script>
+	<p>Operadores de comandos</p>
+	<script type="text/javascript">
+		var distanceToSun = 1.496e+14;
+		 var thickness = 0.01;
+		 var foldCount = 0;
+		 while (thickness < distanceToSun) {
+			 thickness *= 2;
+			 foldCount++;
+		 }
+		 foldCount++;
+		 document.write("<p>Nro de dobras = "+foldCount+"</p>");
+
+	</script>
+	<p>Funções Matemáticas</p>
+	 <div style="text-align:center">
+		 <script type="text/javascript">
+		 var jogada1 = Math.floor(Math.random()*6) + 1;
+		 var jogada2= Math.floor(Math.random()*6) + 1;
+		 document.write("<img src='http://aartededobrar.mobie.in/images/die" + jogada1 + ".gif' />");
+		 document.write("&nbsp;&nbsp;");
+		 document.write("<img src='http://aartededobrar.mobie.in/images/die" + jogada2 + ".gif' />");
+	 </script>
+	 </div>
+	 <p>Interatividade com o comando prompt</p>
+	 <script type="text/javascript">
+		/*var userName = prompt("Informe seu nome: ", "");
+		var userAge = prompt("Infome sua idade: ", "");
+		var userAge = parseFloat(userAge);
+		document.write("Olá " + userName + ".")
+		if (userAge < 18) {
+			document.write("Seus pais sabem que você está online?");
+		}
+		else {
+			document.write("Bem-vindo!");
+		}*/
+	 </script>
+	 <p></p>
+	 <script type="text/javascript">
+		 testNum = parseInt(prompt("Digite um inteiro positivo", "7"));
+
+		 if (isPrime(testNum)) {
+		 	document.write(testNum + " <b>é</b> primo.");
+		 }
+		 else {
+		 	document.write(testNum + " <b>nao é</b> primo.");
+		 }
+	 </script>
+
+
+</body>
+</html>

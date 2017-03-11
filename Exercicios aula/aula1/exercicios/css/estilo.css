@@ -1,0 +1,54 @@
+body {background-color:blue;}
+
+h1 {text-align: center; 
+	font-family: "Impact";
+	color:black;
+}
+
+h2 {text-align: center; 
+	font-family: "verdana";
+	color:whrite;}
+
+h3 {text-align: center; 
+	font-family: "Tahoma";}
+
+#div1 {width:100%;
+	  float:left; 
+	  text-align:center; 
+	  min-height:200px;
+	  background-color:#F9A825; 
+	  border: 10px;}
+
+#div2 {width:100%;
+	  float:left; 
+	  text-align:center; 
+	  min-height:200px;
+	  background-color:#FBC02D;}
+
+#div3 {width:100%;
+	  float:left; 
+	  text-align:center; 
+	  min-height:200px;
+	  background-color:#FDD835;}
+
+#div4 {width:100%;
+	  float:left; 
+	  text-align:center; 
+	  min-height:200px;
+	  background-color:#ffeb3b;}
+
+#divJus {text-align: justify;}
+
+#img25 { width: 25%;
+ 		 height: 166px; 
+ 		 margin-left: -5px; 
+ 		 margin-right: -5px; 
+ 		 margin-top: 0px;
+}
+
+#img50 { width: 50%;
+ 		 height: 166px; 
+ 		 margin-left: -5px; 
+ 		 margin-right: -5px; 
+ 		 margin-top: 0px;
+}

@@ -1,0 +1,60 @@
+<html>
+ <!-– form09.html -->
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title> Fun with Text Boxes </title>
+  <script type="text/javascript" 
+      src="./js/verify.js">
+  </script>
+
+  <script type="text/javascript">
+    function Table(low, high, power)
+    {
+      var message = "i: i^" + power + "\n-------\n";
+      for (var i = low; i <= high; i++) {
+        message = message + i + ": " + Math.pow(i, power) + "\n"; 
+      }
+      document.forms['BoxForm'].Output.value = message;
+    }       
+
+  </script>
+
+  <script type="text/javascript">
+    function FahrToCelsius(tempInFahr){
+      return (5/9)*(tempInFahr - 32);
+    }
+  </script>
+ </head>
+
+ <body>
+  <form id="BoxForm">
+    <p>  <label for="Fahr">Temperatura em Fahrenheit:</label> 
+    <input type="text" id="Fahr" size="10" value="0"
+       onchange="if (VerifyNum(this)) {  
+                 document.forms['BoxForm'].Celsius.value = 
+                     FahrToCelsius(parseFloat(this.value));
+                 }" />
+    &nbsp; <tt>----></tt> &nbsp;
+    <input type="text" id="Celsius" 
+              size="10" value="" onfocus="blur();" />
+    em Celsius   </p>
+
+    <div style="text-align: center;"> 
+      <p> Mostra nros de <input type="text" id="lowRange" size="4"     
+                value="1" onchange="VerifyInt(this);" /> 
+      até <input type="text" id="highRange" size="4" value="10" 
+                onchange="VerifyInt(this);" />
+      elevados a potência de <input type="text" id="power" size=3 value=2
+                                    onchange="VerifyInt(this);" />
+      <br /> <br />
+      <input type="button" value="Gerar tabela" 
+         onclick="Table(parseFloat(document.forms['BoxForm'].lowRange.value),
+                    parseFloat(document.forms['BoxForm'].highRange.value),
+                    parseFloat(document.forms['BoxForm'].power.value));" />
+      <br /> <br />
+      <textarea id="Output" rows="20" cols="15"></textarea>  </p>
+    </div>
+
+  </form>
+ </body>
+</html>
