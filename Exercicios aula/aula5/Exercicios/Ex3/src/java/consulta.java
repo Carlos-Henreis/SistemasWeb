@@ -28,6 +28,7 @@ public class consulta extends HttpServlet {
                 out.println("<p>Resultado "+i);
                 out.println("Codigo: "+ resultSet.getString("codigo"));
                 out.println("Nome: "+ resultSet.getString("nome") +" "+ resultSet.getString("sobrenome")+"</p>"); 
+                i++;
             }
 
         } catch (Exception ex) {
