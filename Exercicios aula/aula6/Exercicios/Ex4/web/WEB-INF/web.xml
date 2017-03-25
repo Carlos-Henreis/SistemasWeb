@@ -4,17 +4,9 @@
         <servlet-name>Registra</servlet-name>
         <servlet-class>Registra</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Consulta</servlet-name>
-        <servlet-class>Consulta</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Registra</servlet-name>
         <url-pattern>/Registra</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Consulta</servlet-name>
-        <url-pattern>/Consulta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

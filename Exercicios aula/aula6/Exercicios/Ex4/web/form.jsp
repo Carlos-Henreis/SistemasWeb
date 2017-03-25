@@ -1,9 +1,15 @@
+<%-- 
+    Document   : form
+    Created on : 24/03/2017, 00:17:43
+    Author     : carlos
+--%>
+
 <%@ page import="beans.FormBean" %>
 <jsp:useBean id="formulario" class="beans.FormBean" scope="session"/>
 <jsp:setProperty name="formulario" property="*"/>
 <html>
     <body bgcolor="#c8d8f8">
-        <form action="form.jsp" method=post>
+        <form action="Confirm.jsp" method=post>
             <center>
                 <table cellpadding=4 cellspacing=2 border=0>
 
@@ -67,31 +73,7 @@
         <%
             if (request.getMethod().equals("POST")) {
         %>
-        <div style="color: red">
-            <p><strong>Você submeteu as seguintes iformações</strong></p>
-            <p><strong>Primeiro Nome</strong><br>
-               <%= formulario.getNome()%>
-            </p>
-            <p><strong>Último Nome</strong><br>
-               <%= formulario.getSobrenome()%>
-            </p>
-            <p><strong>E-mail</strong><br>
-               <%= formulario.getEmail()%>
-            </p>
-            <p><strong>Linguagens</strong><br>
-                <ul>
-                    <%
-                    String linguagens[] = formulario.getLinguagens();
-                    for (int i = 0; i < linguagens.length; i++) {
-                         out.println("<li>"+linguagens[i]+"</li>");
-                    }
-                    %>
-               </ul>
-            </p>
-            <p><strong>Notificação</strong><br>
-               <%= formulario.getNotificacao()%>
-            </p>
-        </div>
+        
         <%-- Cria o bean quando o formulário é submetido--%>
         <%-- Gere a resposta obtendo as informações salvas no bean --%>
 
@@ -101,3 +83,4 @@
         </font>
     </body>
 </html>
+
