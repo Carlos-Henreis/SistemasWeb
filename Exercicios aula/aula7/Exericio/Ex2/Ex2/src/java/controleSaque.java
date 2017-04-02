@@ -18,6 +18,8 @@ public class controleSaque extends HttpServlet {
     private PreparedStatement pstmt;
     private PreparedStatement pstmt1;
     private PreparedStatement pstmt2;
+    private PreparedStatement pstmt3;
+
     
     public void init() throws ServletException {
         inicializaJdbc();
@@ -48,8 +50,11 @@ public class controleSaque extends HttpServlet {
                 } else{
                     double valorcliente = cliente.getSaldo();
                     double saldoAtual = valorcliente - valor;
+                    contaNum();
+                    resultSet.last();
+                    int num = (resultSet.getRow())+1;
                     atualizaSaldo(cliente.getNroConta(), saldoAtual);
-                    MemorizaSaque(nroConta, (-1*valor));
+                    MemorizaSaque(num, nroConta, (-1*valor));
                     cliente.setSaldo(saldoAtual);
                     request.setAttribute("objCliente", cliente);
                     request.setAttribute("valor", valor);
@@ -74,7 +79,8 @@ public class controleSaque extends HttpServlet {
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/Banco", "root", "carloshenrique");
             pstmt = c.prepareStatement("select nome, saldo, nro_conta from cliente where nro_conta = ?");
             pstmt1 = c.prepareStatement("UPDATE cliente set saldo =? WHERE nro_conta =?");
-            pstmt2 = c.prepareStatement("INSERT into atividade values (?, 'saque', ?)"); 
+            pstmt2 = c.prepareStatement("INSERT into acao values (?, ?, 'saldo', ?)");
+            pstmt3 = c.prepareStatement("SELECT * from acao");
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -92,10 +98,15 @@ public class controleSaque extends HttpServlet {
         pstmt1.executeUpdate();
     }
     
-    private void MemorizaSaque (String conta, double saque) throws SQLException {
+    private void MemorizaSaque (int num, String conta, double saque) throws SQLException {
         pstmt2.setInt(1,  Integer.parseInt(conta));
-        pstmt2.setDouble(2,saque);
+        pstmt2.setInt(2,  num);
+        pstmt2.setDouble(3,saque);
         pstmt2.execute();
+    }
+    
+    private void contaNum () throws SQLException {
+        resultSet = pstmt3.executeQuery();
     }
 
 }

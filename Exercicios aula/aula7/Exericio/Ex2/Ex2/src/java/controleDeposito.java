@@ -28,6 +28,7 @@ public class controleDeposito extends HttpServlet {
     private PreparedStatement pstmt;
     private PreparedStatement pstmt1;
     private PreparedStatement pstmt2;
+    private PreparedStatement pstmt3;
     
     public void init() throws ServletException {
         inicializaJdbc();
@@ -57,7 +58,11 @@ public class controleDeposito extends HttpServlet {
                 cliente.setSaldo(resultSet.getDouble("saldo"));
                 double saldoN = cliente.getSaldo()+valor;
                 depositaConta(nroConta, saldoN);
-                MemorizaDep (nroConta, valor);
+                contaNum();
+                resultSet.last();
+                int num = (resultSet.getRow())+1;
+                System.err.println(num);
+                MemorizaDep (num, nroConta, valor);
                 cliente.setSaldo(saldoN);
                 request.setAttribute("objCliente", cliente);
                 request.setAttribute("valor", valor);
@@ -81,7 +86,8 @@ public class controleDeposito extends HttpServlet {
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/Banco", "root", "carloshenrique");
             pstmt = c.prepareStatement("select nome, saldo, nro_conta from cliente where nro_conta = ?");
             pstmt1 = c.prepareStatement("UPDATE cliente set saldo =? WHERE nro_conta =?");
-            pstmt2 = c.prepareStatement("INSERT into atividade values (?, 'deposito', ?)");
+            pstmt2 = c.prepareStatement("INSERT into acao values (?, ?, 'deposito', ?)");
+            pstmt3 = c.prepareStatement("SELECT * from acao");
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -101,9 +107,14 @@ public class controleDeposito extends HttpServlet {
         System.out.print("Cdfaksjdf lkajsf");
     }
     
-    private void MemorizaDep (String conta, double deposito) throws SQLException {
+    private void MemorizaDep (int num, String conta, double deposito) throws SQLException {
         pstmt2.setInt(1,  Integer.parseInt(conta));
-        pstmt2.setDouble(2,deposito);
+        pstmt2.setInt(2,  num);
+        pstmt2.setDouble(3,deposito);
         pstmt2.execute();
+    }
+    
+    private void contaNum () throws SQLException {
+        resultSet = pstmt3.executeQuery();
     }
 }

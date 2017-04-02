@@ -23,6 +23,7 @@ public class controleTransferencia extends HttpServlet {
     private PreparedStatement pstmt;
     private PreparedStatement pstmt1;
     private PreparedStatement pstmt2;
+    private PreparedStatement pstmt3;
 
     public void init() throws ServletException {
         inicializaJdbc();
@@ -69,7 +70,12 @@ public class controleTransferencia extends HttpServlet {
                 saldoAtual = valorcliente + valor;
                 clienteD.setSaldo(saldoAtual);
                 atualizaSaldo(clienteD.getNroConta(), saldoAtual);
-                MemorizaTransf (clienteO.getNroConta(), clienteD.getNroConta(), valor);
+                
+                contaNum();
+                resultSet.last();
+                int num = (resultSet.getRow())+1;
+                
+                MemorizaTransf (clienteO.getNroConta(), clienteD.getNroConta(), num, valor);
                 request.setAttribute("objClienteO", clienteO);
                 request.setAttribute("objClienteD", clienteD);
                 request.setAttribute("valor", valor);
@@ -95,7 +101,8 @@ public class controleTransferencia extends HttpServlet {
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/Banco", "root", "carloshenrique");
             pstmt = c.prepareStatement("select nome, saldo, nro_conta from cliente where nro_conta = ?");
             pstmt1 = c.prepareStatement("UPDATE cliente set saldo =? WHERE nro_conta =?");
-            pstmt2 = c.prepareStatement("INSERT into transferencia values (?, ?, ?)"); 
+            pstmt2 = c.prepareStatement("INSERT into transfere values (?, ?, ?, ?)"); 
+            pstmt3 = c.prepareStatement("SELECT * from transfere");
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -112,12 +119,16 @@ public class controleTransferencia extends HttpServlet {
         pstmt1.executeUpdate();
     }
     
-    private void MemorizaTransf (int contaO, int contaD, double valor) throws SQLException {
+    private void MemorizaTransf (int contaO, int contaD, int num, double valor) throws SQLException {
         pstmt2.setInt(1,  contaO);
         pstmt2.setInt(2,  contaD);
-        pstmt2.setDouble(3,valor);
+        pstmt2.setInt(3,  num);
+        pstmt2.setDouble(4,valor);
         pstmt2.execute();
     }
-    
+       
+    private void contaNum () throws SQLException {
+        resultSet = pstmt3.executeQuery();
+    }
 
 }

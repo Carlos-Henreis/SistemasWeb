@@ -63,9 +63,9 @@ public class controleExtrato extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/Banco", "root", "carloshenrique");
             pstmt = c.prepareStatement("select nome, saldo, nro_conta from cliente where nro_conta = ?");
-            pstmt1 = c.prepareStatement("select acao, valor from atividade where nro_conta = ?");
-            pstmt2 = c.prepareStatement("select nro_contaD, valor from transferencia where nro_contaO = ?");
-            pstmt3 = c.prepareStatement("select nro_contaO, valor from transferencia where nro_contaD = ?");
+            pstmt1 = c.prepareStatement("select acao, valor from acao where nro_conta = ?");
+            pstmt2 = c.prepareStatement("select nro_contaD, saldo from transfere where nro_contaO = ?");
+            pstmt3 = c.prepareStatement("select nro_contaO, saldo from transfere where nro_contaD = ?");
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -165,14 +165,14 @@ public class controleExtrato extends HttpServlet {
                 retorno +=  "  <tr>\n" +
                             "    <td class=\"tg-yw4l\">"+i+"</td>\n" +
                             "    <td class=\"tg-yw4l\">"+resultSet.getString("nro_contaO")+"</td>\n" +
-                            "    <td class=\"tg-yw4l\">"+resultSet.getString("valor")+"</td>\n" +
+                            "    <td class=\"tg-yw4l\">"+resultSet.getString("saldo")+"</td>\n" +
                             "  </tr>";
             }
             else {
                 retorno +=  "  <tr>\n" +
                             "    <td class=\"tg-j2zy\">"+i+"</td>\n" +
                             "    <td class=\"tg-j2zy\">"+resultSet.getString("nro_contaO")+"</td>\n" +
-                            "    <td class=\"tg-j2zy\">"+resultSet.getString("valor")+"</td>\n" +
+                            "    <td class=\"tg-j2zy\">"+resultSet.getString("saldo")+"</td>\n" +
                             "  </tr>";
             }
             i++;
@@ -200,14 +200,14 @@ public class controleExtrato extends HttpServlet {
                retorno +=  "  <tr>\n" +
                            "    <td class=\"tg-yw4l\">"+i+"</td>\n" +
                            "    <td class=\"tg-yw4l\">"+resultSet.getString("nro_contaD")+"</td>\n" +
-                           "    <td class=\"tg-yw4l\">"+resultSet.getString("valor")+"</td>\n" +
+                           "    <td class=\"tg-yw4l\">"+resultSet.getString("saldo")+"</td>\n" +
                            "  </tr>";
 
             }
             else {
                 retorno +=  "    <td class=\"tg-j2zy\">"+i+"</td>\n" +
                             "    <td class=\"tg-j2zy\">"+resultSet.getString("nro_contaD")+"</td>\n" +
-                            "    <td class=\"tg-j2zy\">"+resultSet.getString("valor")+"</td>";
+                            "    <td class=\"tg-j2zy\">"+resultSet.getString("saldo")+"</td>";
             }
             i++;
         }

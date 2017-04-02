@@ -2,7 +2,7 @@
     Transitional//EN">
 <HTML>
     <HEAD>
-        <TITLE>Saldo bancário</TITLE>
+        <TITLE>Inicio - Home Banking</TITLE>
         <LINK REL=STYLESHEET
               HREF="./bank-support/JSP-Styles.css"
               TYPE="text/css">
