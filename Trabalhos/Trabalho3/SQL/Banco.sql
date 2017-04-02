@@ -16,27 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `atividade`
+-- Table structure for table `acao`
 --
 
-DROP TABLE IF EXISTS `atividade`;
+DROP TABLE IF EXISTS `acao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `atividade` (
+CREATE TABLE `acao` (
   `nro_conta` int(11) NOT NULL,
-  `acao` varchar(40) NOT NULL,
-  `valor` double NOT NULL
+  `numero` int(11) NOT NULL,
+  `acao` varchar(64) NOT NULL,
+  `valor` double DEFAULT NULL,
+  PRIMARY KEY (`nro_conta`,`numero`),
+  CONSTRAINT `acao_ibfk_1` FOREIGN KEY (`nro_conta`) REFERENCES `cliente` (`nro_conta`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `atividade`
+-- Dumping data for table `acao`
 --
 
-LOCK TABLES `atividade` WRITE;
-/*!40000 ALTER TABLE `atividade` DISABLE KEYS */;
-INSERT INTO `atividade` VALUES (10,'deposito',120),(10,'saque',-90),(20,'deposito',150),(20,'saque',-50),(20,'deposito',500),(20,'saque',-1000),(30,'saque',-0.6),(70,'saque',-120),(70,'deposito',75);
-/*!40000 ALTER TABLE `atividade` ENABLE KEYS */;
+LOCK TABLES `acao` WRITE;
+/*!40000 ALTER TABLE `acao` DISABLE KEYS */;
+INSERT INTO `acao` VALUES (10,1,'deposito',120),(10,2,'deposito',10),(10,3,'deposito',10),(10,4,'deposito',1220),(10,5,'saldo',-980),(10,6,'saldo',-9323.5),(20,7,'saldo',-123),(20,8,'deposito',4000),(20,9,'saldo',-1000);
+/*!40000 ALTER TABLE `acao` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -48,7 +51,7 @@ DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cliente` (
   `nro_conta` int(11) NOT NULL,
-  `nome` varchar(40) NOT NULL,
+  `nome` varchar(64) NOT NULL,
   `saldo` double NOT NULL,
   PRIMARY KEY (`nro_conta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -60,32 +63,37 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (10,'Carlos Henrique',900),(20,'Maria Marley',100),(70,'teste',150),(60,'Mauricio Marinho', 950),(40,'Luis Costa',1200),(30,'Julio dos Santos',-90),(50,'Joao Silva',700),(90,'vitor pio',50000);
+INSERT INTO `cliente` VALUES (10,'Maria',2000),(20,'Jose',3500);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `transferencia`
+-- Table structure for table `transfere`
 --
 
-DROP TABLE IF EXISTS `transferencia`;
+DROP TABLE IF EXISTS `transfere`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `transferencia` (
-  `nro_contaO` int(11) DEFAULT NULL,
-  `nro_contaD` int(11) DEFAULT NULL,
-  `valor` double NOT NULL
+CREATE TABLE `transfere` (
+  `nro_contaO` int(11) NOT NULL,
+  `nro_contaD` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `saldo` double NOT NULL,
+  PRIMARY KEY (`nro_contaO`,`nro_contaD`,`numero`),
+  KEY `nro_contaD` (`nro_contaD`),
+  CONSTRAINT `transfere_ibfk_1` FOREIGN KEY (`nro_contaO`) REFERENCES `cliente` (`nro_conta`) ON DELETE CASCADE,
+  CONSTRAINT `transfere_ibfk_2` FOREIGN KEY (`nro_contaD`) REFERENCES `cliente` (`nro_conta`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transferencia`
+-- Dumping data for table `transfere`
 --
 
-LOCK TABLES `transferencia` WRITE;
-/*!40000 ALTER TABLE `transferencia` DISABLE KEYS */;
-INSERT INTO `transferencia` VALUES (10,30,100),(90,10,120),(50,20,10),(20,30,50),(30,20,700),(10,70,25),(80,10,55);
-/*!40000 ALTER TABLE `transferencia` ENABLE KEYS */;
+LOCK TABLES `transfere` WRITE;
+/*!40000 ALTER TABLE `transfere` DISABLE KEYS */;
+INSERT INTO `transfere` VALUES (10,20,1,100),(20,10,2,900);
+/*!40000 ALTER TABLE `transfere` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -97,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-31 11:30:10
+-- Dump completed on 2017-04-01 23:14:28
