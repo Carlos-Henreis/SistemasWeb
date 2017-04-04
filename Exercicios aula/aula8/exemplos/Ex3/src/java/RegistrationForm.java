@@ -30,6 +30,7 @@ public class RegistrationForm extends HttpServlet {
                 + "VALUE=\"" + lastName + "\"><BR>\n"
                 + "Email Address: \n"
                 + " <INPUT TYPE=\"TEXT\" NAME=\"emailAddress\" "
+                + "<input type=\"password\" class=\"inputtext _58mg _5dba _2ph-\" data-type=\"text\" name=\"reg_passwd__\" aria-required=\"1\" placeholder=\"\" id=\"u_0_e\" aria-label=\"Nova senha\" aria-describedby=\"js_ab\">"
                 + "VALUE=\"" + emailAddress + "\"><P>\n"
                 + "<INPUT TYPE=\"SUBMIT\" VALUE=\"Register\">\n"
                 + "</FORM></CENTER></BODY></HTML>");

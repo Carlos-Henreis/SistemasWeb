@@ -32,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
         response.addCookie(c2);
         Cookie c3 = new LongLivedCookie("emailAddress", emailAddress);
         response.addCookie(c3);
-        String formAddress = "/registration-form";
+        String formAddress = "./registration-form";
          if (isMissingValue) {
             response.sendRedirect(formAddress);
         } else {
