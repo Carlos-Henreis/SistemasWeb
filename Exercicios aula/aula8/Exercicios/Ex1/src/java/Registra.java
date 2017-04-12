@@ -42,7 +42,7 @@ public class Registra extends HttpServlet {
     private void inicializaJdbc() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/escola", "root", "carloshenrique");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/privado", "root", "carloshenrique");
             //Class.forName("org.postgresql.Driver"); 
             //Connection c = DriverManager.getConnection
             //           ("jdbc:postgresql://localhost/escola", "root", "passwd");
