@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Demonstration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script>
+	 $(document).ready(function(){
+	 var url = "names.php";
+
+	 function getJSONAndList(value){
+	 $.getJSON(url,{"query" : value}).done(
+	function( data ) {
+	 console.log("getJSON:",data);
+	 setList(data);
+	 });
+	 }
+
+
+	 // Preenche a lista de Nomes
+	 function setList(obj){
+	 var result = obj.result;
+	 var list = $("#list");
+	 list.empty(); // limpando a lista
+
+	 for (var i = 0; i < result.length ; i++) {
+	 var li = $("<li>"+ result[i] +"</li>");
+	 list.append(li);
+	 }
+	 }
+
+	 $("#searchstring").keyup(function(){
+	 getJSONAndList(this.value)
+	 })
+	 });
+	</script>
+    
+</head>
+<body>
+<h1>jQuery Live Search</h1>
+
+<p>
+    Search for: <input type="text" id="searchstring"/>
+</p>
+
+<div id="results">
+    <ul id="list">
+        <li>Results will be displayed here.</li>
+    </ul>
+</div>
+
+</body>
+</html>
