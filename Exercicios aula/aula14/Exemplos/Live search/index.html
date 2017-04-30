@@ -9,7 +9,7 @@
 	                  
 	      function getJSONAndList(value){                
 	         $.getJSON(url,{"query" : value}).done(
-			 function( data ) {                 
+		function( data ) {                  
 	            console.log("getJSON:",data);  
 	            setList(data);
 	          });               
@@ -23,7 +23,7 @@
 	         list.empty(); // limpando a lista                       
 	         
 	         for (var i = 0; i < result.length ; i++) {
-	            var li = $("<li>"+ result[i]["id"]+"<br>"+result[i]["nome"]+"<br>"+result[i]["endereco"]["rua"]+","+ result[i]["endereco"]["numero"]+","+ result[i]["endereco"]["bairro"]+","+ result[i]["endereco"]["cidade"]+"</li>");
+	            var li = $("<li>"+ result[i] +"</li>");
 	            list.append(li);
 	           }                
 	      }     

@@ -27,8 +27,8 @@
         echo $sql;
         $result = $db->query($sql);      /*  execute a query */
         while ($row = $result->fetch_assoc()) {
-        echo "<h4> Nome: " . $row["nome"] . "</h4> \n";
-        echo "<h5> Matricula: " . $row["matric"] . "<br/> Email: " . $row["email"] . "<br/> Endereco: " . $row["endereco"] . "</h5> \n";
+            echo "<h4> Nome: " . $row["nome"] . "</h4> \n";
+            echo "<h5> Matricula: " . $row["matric"] . "<br/> Email: " . $row["email"] . "<br/> Endereco: " . $row["endereco"] . "</h5> \n";
         }
         $db->close();
         ?></body></html>

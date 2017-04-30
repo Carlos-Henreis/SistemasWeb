@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> First WebSite </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"> </script>
+      <style>
+         body {
+            background-color: #CCCCCC;
+            text-align: center;
+          }
+         .displaybox {
+            margin: auto;
+            width: 150px;
+            background-color: #FFFFFF;
+            border: 2px solid #000000;
+            padding: 10px;
+            font: 1.5em normal verdana, helvetica, arial, sans-serif;
+          }
+         </style>
+         
+        <script>
+            $(document).ready(function(){
+            var url = "request.php";
+         
+            function getAndDisplay(){              
+               $.get( url ).done(function( data ){                   
+                  console.log("get:", data);
+                  console.log("get + parse", $.parseJSON(data));
+                });           
+            }
+                        
+            function getJSONAndDisplay(){              
+               $.getJSON( url ).done(function( data ) {                  
+                  console.log("getJSON:",data);  
+                  setTime(data);
+                });               
+            }
+            
+            // Preenche o campo de horas
+            function setTime(obj){
+               var text = obj.hour + ":" + obj.minute + ":" + obj.second
+               $("#showtime").html(text);
+            }
+            
+            // Atribui ao evento de click do
+            // botao "btn_click" à função teste()
+            $("#bt_click").click(function(){
+               getAndDisplay();               
+               getJSONAndDisplay();
+            });
+         });
+        </script>
+
+    </head>
+    <body>
+      <button id="bt_click">Get the Time</button>
+      <div id="showtime" class="displaybox"></div>   
+    </body>
+</html>
