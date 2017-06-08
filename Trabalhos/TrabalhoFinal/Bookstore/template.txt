@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title> Bookstore </title>
+		<link rel="stylesheet" href="resources/styles/style.css" type="text/css"/>
+		<link rel="script" href="resources/src/">
+	</head>
+
+	<body>
+		<div class="content">
+
+			<!--Open Header-->
+			<?php
+				include 'resources/includes/header.html';
+
+				$link = connect();
+
+				$sql = "SELECT ISBN, title, description
+					   FROM bookdescriptions
+					   ORDER BY rand()
+					   LIMIT 5;";
+
+				$result = mysqli_query($link, $sql)
+						or die('SQL syntax error: ' . mysqli_error($link));
+
+				$row = mysqli_fetch_array($result);
+			?>
+			<!--Close Header-->
+
+			<div class="bodyContainer">
+				
+				<?php
+					include 'resources/includes/leftColumn.html';
+				?>
+
+				<div class="right">
+					<!--
+
+						INSERT ALL INFORMATION HERE.
+
+					-->
+				</div>
+
+			</div>
+
+			<!--Open Footer-->
+			<?php
+				include 'resources/includes/footer.html';
+			?>
+			<!--Close Footer-->
+		</div>
+	</body>
+</html>
