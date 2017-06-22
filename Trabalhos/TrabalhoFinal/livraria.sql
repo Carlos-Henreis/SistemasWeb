@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Jun-2017 às 07:51
+-- Generation Time: 21-Jun-2017 às 02:23
 -- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -63,7 +63,9 @@ INSERT INTO `bookauthors` (`AuthorID`, `nameF`, `nameL`) VALUES
 (30, 'Julian', 'Templeman'),
 (31, 'Thomas', 'Erl'),
 (32, 'Hugh E.', 'Williams'),
-(33, 'David', 'Lane');
+(33, 'David', 'Lane'),
+(41, 'aaaaaaaaa', 'aaaaaaaaa'),
+(42, 'Robin', 'Nixon');
 
 -- --------------------------------------------------------
 
@@ -81,6 +83,7 @@ CREATE TABLE `bookauthorsbooks` (
 --
 
 INSERT INTO `bookauthorsbooks` (`ISBN`, `AuthorID`) VALUES
+('0071841589', 42),
 ('0131428985', 31),
 ('0201433362', 17),
 ('0201433362', 18),
@@ -104,6 +107,7 @@ INSERT INTO `bookauthorsbooks` (`ISBN`, `AuthorID`) VALUES
 ('0672328232', 22),
 ('0764574892', 23),
 ('0782142796', 24),
+('1491918667', 42),
 ('1590595521', 1),
 ('1590595726', 29),
 ('1590595726', 30);
@@ -131,7 +135,8 @@ INSERT INTO `bookcategories` (`CategoryID`, `CategoryName`) VALUES
 (5, 'ASP.NET'),
 (6, 'Regular Expressions'),
 (7, 'Web Services'),
-(8, 'Morse Code');
+(8, 'Morse Code'),
+(13, 'Javascript');
 
 -- --------------------------------------------------------
 
@@ -156,10 +161,12 @@ INSERT INTO `bookcategoriesbooks` (`CategoryID`, `ISBN`) VALUES
 (1, '0596101104'),
 (1, '0672326728'),
 (1, '0782142796'),
+(1, '1491918667'),
 (1, '1590595521'),
 (2, '0596005431'),
 (2, '0596101104'),
 (2, '0672326728'),
+(2, '1491918667'),
 (2, '1590595521'),
 (3, '0321344758'),
 (3, '0321350316'),
@@ -172,7 +179,9 @@ INSERT INTO `bookcategoriesbooks` (`CategoryID`, `ISBN`) VALUES
 (6, '0596528124'),
 (6, '0764574892'),
 (7, '0131428985'),
-(7, '0782142796');
+(7, '0782142796'),
+(13, '0071841589'),
+(13, '1491918667');
 
 -- --------------------------------------------------------
 
@@ -196,8 +205,13 @@ CREATE TABLE `bookcustomers` (
 --
 
 INSERT INTO `bookcustomers` (`custID`, `fname`, `lname`, `email`, `street`, `city`, `state`, `zip`) VALUES
-(1, 'Carlos', 'teste', 'carlos_henreis@yahoo.com.br', 'carlos', 'Pedralva', 'OR', '37520'),
-(2, 'Leticia', 'Reis', 'carlos_henreis@outlook.com', 'Pinheiro', 'Itajuba', 'TX', '11212');
+(1, 'Carlos', 'Reis', 'carlos_henreis@yahoo.com.br', 'Pinheirinho 2012', 'itajuba', 'MG', '32423'),
+(2, 'Carlos', 'Henrique', 'carlos_henreis@yahoo.com.br', 'rer', 'erw', 'OK', '32423'),
+(3, 'Carlos', 'Henrique', 'carlos_henreis@yahoo.com.br', 'rer', 'erw', 'OK', '32423'),
+(4, 'Carlos', 'Henrique', 'carlos_henreis@yahoo.com.br', 'teste', 'erw', 'OK', '32423'),
+(5, 'Laercio', 'Baldochi', 'baldochi@gmail.com', 'Av. BPS', 'Itajuba', 'MG', '11111'),
+(6, 'Carlos', 'Henrique', 'carlos_henreis@yahoo.com.br', 'rer', 'erw', 'OK', '32423'),
+(7, 'Carlos', 'Henrique', 'carlos_henreis@yahoo.com.br', 'rer', 'erw', 'OK', '32423');
 
 -- --------------------------------------------------------
 
@@ -221,6 +235,7 @@ CREATE TABLE `bookdescriptions` (
 --
 
 INSERT INTO `bookdescriptions` (`ISBN`, `title`, `description`, `price`, `publisher`, `pubdate`, `edition`, `pages`) VALUES
+('0071841589', 'Javascript: 20 lessons to successful web developme', 'blablabla', '30.79', 'NewRiders Press', 'February 1, 2016', '1', '256'),
 ('0131428985', 'Service-Oriented Architecture : A Field Guide to Integrating XML and Web Services', '<p>The emergence of key second-generation Web  services standards has positioned service-oriented architecture (SOA)  as the foremost platform for contemporary business automation  solutions. The integration of SOA principles and technology is  empowering organizations to build applications with unprecedented  levels of flexibility, agility, and sophistication (while also allowing  them to leverage existing legacy environments).</p><p>This  guide will help you dramatically reduce the risk, complexity, and cost  of integrating the many new concepts and technologies introduced by the  SOA platform. It brings together the first comprehensive collection of  field-proven strategies, guidelines, and best practices for making the  transition toward the service-oriented enterprise.</p><p>Writing  for architects, analysts, managers, and developers, Thomas Erl offers  expert advice for making strategic decisions about both immediate and  long-term integration issues. Erl addresses a broad spectrum of  integration challenges, covering technical and design issues, as well  as strategic planning.</p><ul>  <li>Covers crucial second-generation  (WS-*) Web services standards: BPEL4WS, WS-Security, S-Coordination,  WS-Transaction, WS-Policy, WS-ReliableMessaging, and WS-Attachments </li>  <li>Includes  hundreds of individual integration strategies and more than 60 best  practices for both XML and Web services technologies </li>  <li>Includes a complete tutorial on service-oriented design principles for business and technical modeling </li>  <li>Explores  design issues related to a wide variety of service-oriented integration  architectures that integrate XML and Web services into legacy and EAI  environments </li>  <li>Provides a clear roadmap for planning a long-term migration toward a standardized service-oriented enterprise</li></ul><p>Service-oriented  architecture is no longer an exclusive discipline practiced only by  expensive consultants. With this book\'s help, you can plan, architect,  and implement your own service-oriented environments-efficiently and  cost-effectively.</p>', '44.95', 'Prentice Hall', 'April 16, 2004', '1', '560'),
 ('0201433362', 'SQL Queries for Mere Mortals: A Hands-On Guide to Data Manipulation in SQL ', '<p>To the people who are accomplished in its use, Structured Query  Language (SQL) is a highly capable, eminently flexible, even beautiful  way of describing the data that you want from a database, or the  changes that you want to make to a database. For the rest of us,  however, SQL is a first-class nuisance that we do our best to avoid by  relying on relatively user-friendly--but usually less powerful--tools. <em>SQL Queries for Mere Mortals</em> aims to bring SQL-phobes  closer to the first camp by tutoring them carefully in what SQL can do.<p> The authors recognize that SQL queries usually come about as a result  of questions from human beings, and so usefully spend a fair bit of  time showing how to convert, say, &quot;In what cities do our customers  live?&quot; into, &quot;Select city from the customers table&quot; and, finally,  &quot;SELECT city FROM customers&quot; in SQL. They call this the &quot;translation  and clean up&quot; process, and it\'s a fine approach. They don\'t press it  too far, however, and are equally adept at presenting straight  explanations of SQL syntax elements in prose. They spend a lot of  energy graphically diagramming aspects of SQL syntax in a format that  requires some up-front study. A particular reader might prefer text  capsules to this arrow-intensive format, but other learners might like  the graphical syntax diagrams. <em>--David Wall</em></p>', '54.99', 'Addison-Wesley Professional', 'August 21, 2000', '1', '528'),
 ('0321344758', 'Don\'t Make Me Think', '<p>Usability design is one of the most important--yet often least attractive--tasks for a Web developer. In <em>Don\'t Make Me Think</em>, author Steve Krug lightens up the subject with good humor and excellent, to-the-point examples.</p><p> The title of the book is its chief personal design premise. All of the  tips, techniques, and examples presented revolve around users being  able to surf merrily through a well-designed site with minimal  cognitive strain. Readers will quickly come to agree with many of the  book\'s assumptions, such as &quot;We don\'t read pages--we scan them&quot; and &quot;We  don\'t figure out how things work--we muddle through.&quot; Coming to grips  with such hard facts sets the stage for Web design that then produces  topnotch sites.</p><p> Using an attractive mix of full-color screen  shots, cute cartoons and diagrams, and informative sidebars, the book  keeps your attention and drives home some crucial points. Much of the  content is devoted to proper use of conventions and content layout, and  the &quot;before and after&quot; examples are superb. Topics such as the wise use  of rollovers and usability testing are covered using a consistently  practical approach.</p><p> This is the type of book you can blow  through in a couple of evenings. But despite its conciseness, it will  give you an expert\'s ability to judge Web design. You\'ll never form a  first impression of a site in the same way again. <em>--Stephen W. Plain</em></p><p> <strong>Topics covered:</strong> </p><ul>  <li>User patterns </li>  <li>Designing for scanning </li>  <li>Wise use of copy </li>  <li>Navigation design </li>  <li>Home page layout </li>  <li>Usability testing</li></ul>', '35.00', 'New Riders Press', 'Aug. 18, 2005', '2', '224'),
@@ -237,6 +252,7 @@ INSERT INTO `bookdescriptions` (`ISBN`, `title`, `description`, `price`, `publis
 ('0672328232', 'ASP.NET 2.0 Unleashed', '<p><em>ASP.NET 2.0 Unleashed&nbsp;</em>is a revision of the best-selling <em>ASP.NET Unleashed, </em>by Microsoft Software Legend <strong>Stephen Walther</strong>. It<strong>&nbsp;</strong>covers  virtually all features of ASP.NET 2.0&nbsp;including more than 50 new  controls, personalization, master pages, and web parts. All code  samples are presented in VB and C#. Throughout the more than&nbsp;2,000  pages, you will be shown how to develop state-of-the-art Web  applications using Microsoft\'s latest development tools. This resource  is guaranteed to be used as a&nbsp;reference guide&nbsp;over and over! </p>', '59.99', 'Sams', 'June 6, 2006', '1', '1992'),
 ('0764574892', 'Beginning Regular Expressions', '<p>Regular expressions help users and developers to find and manipulate  text more effectively and efficiently. In addition, regular expressions  are supported by many scripting languages, programming languages, and  databases. This example-rich tutorial helps debunk the traditional  reputation of regular expressions as being cryptic. It explains the  various parts of a regular expression pattern, what those parts mean,  how to use them, and common pitfalls to avoid when writing regular  expressions. With chapters on using regular expressions with popular  Windows platform software including databases, cross platform scripting  languages, and programming languages, you\'ll learn to make effective  use of the power provided by regular expressions once you fully  comprehend their strengths and potential. What you will learn from this  book -Fundamental concepts of regular expressions and how to write them  -How to break down a text manipulation problem into component parts so  you can then logically construct a regular expression pattern -How to  use regular expressions in several scripting and programming languages  and software packages -The variations that exist among regular  expression dialects -Reusable, real-world working code that can be used  to solve everyday regular expression problems Who this book is for:  This book is for developers who need to manipulate text but are new to  regular expressions. Some basic programming or scripting experience is  useful but not required.</p>', '39.99', 'Wrox', 'February 4, 2005', '1', '768'),
 ('0782142796', 'Creating Interactive Web Sites with PHP and Web Services', '<p>  PHP and MySQL are great tools for building database-driven  websites. There\'s nothing new about that. What is new is the  environment in which your site operates&mdash;a world rich (and growing  richer) in web services that can add value and functionality in many  different ways. Creating Interactive Web Sites with PHP and Web  Services walks you through every step of a major web project&mdash;a  content-management system&mdash;teaching you both the basic techniques and  little-known tricks you need to build successful web sites. And you can  use those skills to develop dynamic applications that will meet your  special requirements. Here\'s some of what you\'ll find covered inside: </p><ul>  <li>Adding, deleting, and displaying data with a custom content-management system </li>  <li>Building a template system with PHP </li>  <li>Interacting with web services using PHP and MySQL </li>  <li>Creating and managing a user system and a shopping cart </li>  <li>Processing credit card payments using merchant accounts and third-party payment solutions </li>  <li>Tracking site statistics using PHP and MySQL </li>  <li>Enhancing your site with third-party scripts </li></ul><p> Tons of examples, complete with explanations and supported by online  source code, will speed your progress, whether you\'re a true beginner  or already have PHP experience. This book is platform-agnostic, so it  doesn\'t matter if you\'re deploying your site on Linux or Windows. You  also get PHP and MySQL references, so you can quickly resolve questions  about syntax and similar issues. </p>', '39.99', 'Sybex', 'December 19, 2003', '1', '512'),
+('1491918667', 'Learning PHP, MySQL and Javascript', 'bla bla bla', '22.29', 'Macron', 'June 12, 2017', '4', '912'),
 ('1590595521', 'Beginning PHP and MySQL 5', '<p> <em>Beginning PHP 5 and MYSQL: From Novice to Professional</em> offers a comprehensive introduction to two of the most popular Web  application building technologies on the planet: the scripting language  PHP and the MySQL database server. This book will not only expose you  to the core aspects of both technologies, but will provide valuable  insight into how they are used in unison to create dynamic data-driven  Web applications.</p><p><em>Beginning PHP 5 and MYSQL</em> explains the  new features of the latest releases of the world&rsquo;s most popular Open  Source Web development technologies: MySQL 4 database server and PHP 5  scripting language. This book explores the benefits, extensive new  features, and advantages of the object-oriented PHP 5, and how it can  be used in conjunction with MySQL 4 to create powerful dynamic Web  sites. </p><p> This is the perfect book for the Web designer,  programmer, hobbyist, or novice that wants to learn how to create  applications with PHP 5 and MySQL 4, and is a great entrance point for  Apress&rsquo;s extensive spectrum of PHP books planned for 2004.</p>', '44.99', 'Apress', 'January 23, 2006', '1', '952'),
 ('1590595726', 'Beginning ASP.NET 2.0 in C#', '<p><em>Beginning ASP.NET 2.0 in C# 2005: From Novice to Professional</em> steers you through the maze of ASP.NET web programming concepts. You  will learn language and theory simultaneously, mastering the core  techniques necessary to develop good coding practices and enhance your  skill set.</p><p>This book provides thorough coverage of ASP.NET,  guiding you from beginning to advanced techniques, such as querying  databases from within a web page and performance-tuning your site.  You\'ll find tips for best practices and comprehensive discussions of  key database and XML principles.</p><p>The book also emphasizes the  invaluable coding techniques of object orientation and code-behind,  which will enable you to build real-world websites instead of just  scraping by with simplified coding practices. By the time you finish  this book, you will have mastered the core techniques essential to  professional ASP.NET developers.</p>', '49.99', 'Apress', 'January 27, 2006', '1', '1184');
 
@@ -258,12 +274,9 @@ CREATE TABLE `bookorderitems` (
 --
 
 INSERT INTO `bookorderitems` (`orderID`, `ISBN`, `qty`, `price`) VALUES
-(1, '0596005431', 1, 44.95),
-(1, '0596005601', 11, 29.95),
-(1, '0672325675', 1, 14.99),
-(3, '059600916X', 1, 49.95),
-(3, '1590595521', 1, 44.99),
-(5, '0764574892', 1, 39.99);
+(10, '0131428985', 1, 44.95),
+(10, '1491918667', 1, 22.29),
+(12, '0764574892', 1, 39.99);
 
 -- --------------------------------------------------------
 
@@ -282,11 +295,18 @@ CREATE TABLE `bookorders` (
 --
 
 INSERT INTO `bookorders` (`orderID`, `custID`, `orderdate`) VALUES
-(1, 1, 1496873981),
-(2, 1, 1496876637),
-(3, 3, 1496899446),
-(4, 3, 1496899782),
-(5, 3, 1496899804);
+(1, 0, 1497976555),
+(2, 1, 1497976867),
+(3, 1, 1497976920),
+(4, 5, 1497993252),
+(5, 5, 1497993350),
+(6, 5, 1497993474),
+(7, 5, 1498003631),
+(8, 5, 1498003709),
+(9, 5, 1498004162),
+(10, 5, 1498004193),
+(11, 1, 1498004360),
+(12, 1, 1498004392);
 
 -- --------------------------------------------------------
 
@@ -295,20 +315,18 @@ INSERT INTO `bookorders` (`orderID`, `custID`, `orderdate`) VALUES
 --
 
 CREATE TABLE `funcionario` (
-  `codigo` int(11) NOT NULL,
-  `nome` varchar(50) DEFAULT NULL,
-  `login` varchar(30) DEFAULT NULL,
-  `senha` varchar(15) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `senha` varchar(32) DEFAULT NULL,
+  `nome` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`codigo`, `nome`, `login`, `senha`) VALUES
-(123, 'funcionario', 'func', 'func'),
-(124, 'funcionario', 'func', 'func'),
-(125, 'funcionario', 'func', 'func');
+INSERT INTO `funcionario` (`id`, `email`, `senha`, `nome`) VALUES
+(1, 'carlos_henreis@yahoo.com.br', 'carlos', 'Carlos Henrique');
 
 --
 -- Indexes for dumped tables
@@ -352,12 +370,6 @@ ALTER TABLE `bookdescriptions`
   ADD KEY `strTitle` (`title`);
 
 --
--- Indexes for table `bookorderitems`
---
-ALTER TABLE `bookorderitems`
-  ADD PRIMARY KEY (`orderID`,`ISBN`);
-
---
 -- Indexes for table `bookorders`
 --
 ALTER TABLE `bookorders`
@@ -367,7 +379,7 @@ ALTER TABLE `bookorders`
 -- Indexes for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`id`,`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -377,27 +389,27 @@ ALTER TABLE `funcionario`
 -- AUTO_INCREMENT for table `bookauthors`
 --
 ALTER TABLE `bookauthors`
-  MODIFY `AuthorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `AuthorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `bookcategories`
 --
 ALTER TABLE `bookcategories`
-  MODIFY `CategoryID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `CategoryID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `bookcustomers`
 --
 ALTER TABLE `bookcustomers`
-  MODIFY `custID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `custID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `bookorders`
 --
 ALTER TABLE `bookorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,17 +1,20 @@
-<div class="header">
-	<div class="logo">
-		<a href="index.php"> <img src="resources/images/Logo.png"/> </a>
-	</div>
+<div>
+	<div id="templatemo_menu">
+    	<ul>
+            <li><a href="index.php" class="current">Inicio</a></li>
+            <li><a href="shoppingCart.php">Carrinho</a></li>
+            <li><a href="checkout01.php">Minha Conta</a></li>            
+            <li><a href="principal.php">Área Restrita</a></li> 
+            <li><form action="SearchBrowse.php" method="GET">
+	  				<input type="text" class="searchField1" name="search" autofocus placeholder="Buscar" /> 
+				</form>
+			</li> 
+    	</ul>
+    </div> <!-- end of menu -->
+   	<div id="atraz_menu"></div>
+    <div id="templatemo_header">
 
-	<?php
+        <?php
 		include "resources/src/Connection.php";
-	?>
-
-	<div class="useful">
-		<a href="principal.php"> <img src="resources/images/restrict.png" title="Área restrita" /> </a>
-		<a href="index.php"> <img src="resources/images/account.png" title="Minha conta" /> </a>
-		<a href="shoppingCart.php"> <img src="resources/images/cart.png" title="Carrinho de compras" /> </a>
-		<a href="index.php"> <img src="resources/images/home.png" title="inicio" /> </a>
-	</div>
-
-</div>
+		?>
+    </div> <!-- end of header -->

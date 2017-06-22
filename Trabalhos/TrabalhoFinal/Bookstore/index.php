@@ -1,51 +1,58 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title> COM222 Books </title>
-		<link rel="stylesheet" href="resources/styles/style.css" type="text/css"/>
-		<link rel="script" href="resources/src/">
+		<meta http-equiv="Content-Language" content="pt-br">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>COM222-Inicio</title>
+		<link href="resources/styles/style.css" rel="stylesheet" type="text/css" />
 	</head>
 
 	<body>
-		<div class="content">
+		<div id="templatemo_container">
 
 			<!--Open Header-->
 			<?php
 				include 'resources/includes/header.html';
-
-				$link = connect();
-
-				$sql = "SELECT ISBN, title, description
-					   FROM bookdescriptions
-					   ORDER BY rand()
-					   LIMIT 5;";
-
-				$result = mysqli_query($link, $sql)
-						or die('SQL syntax error: ' . mysqli_error($link));
-
-				$row = mysqli_fetch_array($result);
+				
 			?>
 			<!--Close Header-->
 
-			<div class="bodyContainer">
+			<div id="templatemo_content">
 				
 				<?php
 					include 'resources/includes/leftColumn.html';
 				?>
 
-				<div class="right">
+				<div id="templatemo_content_right">
 					<?php
+						$link = connect();
+
+						$sql = "SELECT ISBN, title, description
+							   FROM bookdescriptions
+							   ORDER BY rand()
+							   LIMIT 5;";
+
+						$result = mysqli_query($link, $sql)
+								or die('SQL syntax error: ' . mysqli_error($link));
+
+						$row = mysqli_fetch_array($result);
 						while ($row = mysqli_fetch_array($result)) {
 
-							$short = substr($row['description'], 0, 500) . " ... <a href='ProductPage.php?isbn=$row[ISBN]'> <br> [Mais] </a>";
+							$short = substr($row['description'], 0, 80).'...';
 							$authors = fListAuthors($link, $row['ISBN']);
 
-							echo "<div class='indexBook'>
-									<div class='title'> <a href='ProductPage.php?isbn=$row[ISBN]'> $row[title] </a> </div>
-									<div class='author'> $authors </div>
-									<div class='image'> <a href='ProductPage.php?isbn=$row[ISBN]'> <img src='https://baldochi.unifei.edu.br/COM222/trabfinal/imagens/$row[ISBN].01.MZZZZZZZ.jpg' /> </a> </div> 
-									<div class='detail'> $short </div>
-								  </div>";
+							echo "<div class='templatemo_product_box'>
+									<h1><a href='ProductPage.php?isbn=$row[ISBN]'> $row[title] </a> <span>($authors)</span></h1>
+									<a href='ProductPage.php?isbn=$row[ISBN]'> <img src='resources/uploads/$row[ISBN].01.MZZZZZZZ.jpg' height='150' width='100'/> </a>
+									<div class='product_info'>
+										<p> $short </p>
+										<div class='buy_now_button'><a href='shoppingCart.php?addISBN=$row[ISBN]'>Comprar</a></div>
+                    					<div class='detail_button'><a href='ProductPage.php?isbn=$row[ISBN]'>Detalhe</a></div>
+                    				</div>
+					                <div class='cleaner'>&nbsp;</div>
+					            </div><br>
+					            <div class='cleaner_with_width'>&nbsp;</div><br>
+								  ";
 						}
 					?>
 				</div>
@@ -59,3 +66,5 @@
 		</div>
 	</body>
 </html>
+            
+        

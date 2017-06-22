@@ -1,34 +1,22 @@
-<?php
-    session_start();
-
-    if (!isset($_SESSION['email'])) {
-		header("location: checkout01.php");
-	}
-
-	if($_COOKIE['BookCount'] == null)
-		header("location: index.php");
-
-	$email = $_SESSION['email'];
-?>
-
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title> COM222 Books </title>
-		<link rel="stylesheet" href="resources/styles/style.css" type="text/css"/>
-		<link rel="script" href="resources/src/">
+		<meta http-equiv="Content-Language" content="pt-br">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>COM222-CK02</title>
+		<link href="resources/styles/style.css" rel="stylesheet" type="text/css" />
 	</head>
 
 	<body>
-		<div class="content">
+		<div id="templatemo_container">
 
 			<!--Open Header-->
 			<?php
 				include 'resources/includes/header.html';
 
 				$link = connect();
-
-				$sql = "SELECT custID
+				$email = $_POST['email'];
+				$sql = "SELECT *
 						FROM bookcustomers
 						WHERE email LIKE '$email'";
 
@@ -37,22 +25,22 @@
 			?>
 			<!--Close Header-->
 
-			<div class="bodyContainer">
+			
+			<div id="templatemo_content">
+			
+				<div class="checkoutContainer">
 				
 					<form method="post" action="checkout03.php" autocomplete="on">
 
 						<?php
 							if(mysqli_num_rows($result) == 0) {
-								echo "<div class='title2'> Novo Cliente - Forneça seu endereço de e-mail. </div>";
+								echo "<div class='title2'> Benvido ao nosso site -- Por favor, forneça um endereço para entrega </div>";
 								$check = "new";
 							} 
 							else {
-								echo "<div class='title2'> Retornando as vendas - Confirme seu endereço de e-mail. </div>"; 
+								echo "<div class='title2'> Benvindo de volta -- Por favor, confirme seu endereço de entrega. </div>"; 
 								$check = "old";
 
-								$sql = "SELECT custID, fname, lname, street, city, state, zip
-									FROM bookcustomers
-									WHERE email LIKE '$email'";
 
 								$result = mysqli_query($link, $sql)
 									or die('SQL syntax error: ' . mysqli_error($link));
@@ -119,7 +107,7 @@
 					               CEP: </td>
 					            <td>
 					               <input type="text" name="zip" style="width:60px;" value="<?php @$zip= $row['zip']; echo $zip;?>" required 
-					                      placeholder="CEP" title="CEP" maxlength="5" pattern="[0-9]{5}" />
+					                      placeholder="CEP" title="CEP apenas 5 numeros" maxlength="5" pattern="[0-9]{5}" />
 					            </td>
 					         </tr>
 
@@ -127,16 +115,16 @@
 					            <td>
 					            </td>
 					            <td>
-					               <!-- sample site uses mcrypt encryption enhancement for custID -->
-					               <!-- source: //source: http://stackoverflow.com/questions/2448256/php-mcrypt-encrypting-decrypting-file -->
-					               <input type="hidden" name="custIDe" value="vVXT5PM0gelqDHlHxU8U3uTRSMk5xKJ6A8aGx%2B7LhO1OsXdC1sdkn6Pfv8vpzj5X46GzlZPCa%2FmhF6%2FMP1rDMw%3D%3D">
-					               <input type="hidden" name="check" value="<?php echo $check; ?>">
-					               <br><br>
-					               <input class="button" type="submit" value="Finalizar Compra" />
+					            	<input class="button" type="submit" value="Prosseguir" />
+					               	<input type="hidden" name="custID" value="<?php echo $row['custID']; ?>">
+					               	<input type="hidden" name="check" value="<?php echo $check; ?>">
+					               	<br><br>
+					               	
 					            </td>
 					         </tr>
 					    </table>
 					</form>
+				</div>
 
 			</div>
 

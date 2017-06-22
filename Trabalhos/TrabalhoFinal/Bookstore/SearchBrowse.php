@@ -1,79 +1,85 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title> COM222 Books </title>
-		<link rel="stylesheet" href="resources/styles/style.css" type="text/css"/>
-		<link rel="script" href="resources/src/">
+		<meta http-equiv="Content-Language" content="pt-br">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>COM222-Busca</title>
+		<link href="resources/styles/style.css" rel="stylesheet" type="text/css" />
 	</head>
 
+
 	<body>
-		<div class="content">
+		<div id="templatemo_container">
 
 			<!--Open Header-->
 			<?php
-				include 'resources/includes/header.html';
+			include 'resources/includes/header.html';
 
-				@$catID = $_GET['catID'];
-				@$catName = $_GET['catName'];
-				@$search = $_GET['search'];
 
-				$link = connect();
+			$link = connect();
 
-				if(!empty($search)) {
-					$sql = "SELECT DISTINCT a.ISBN, a.title, a.description, b.ISBN, b.AuthorID, c.AuthorID, c.nameF, c.nameL, d.CategoryID, e.CategoryID, e.ISBN
-					 	    FROM bookdescriptions a, bookauthorsbooks b, bookauthors c, bookcategories d, bookcategoriesbooks e
-					        WHERE a.ISBN = b.ISBN AND b.ISBN = e.ISBN AND d.CategoryID = e.CategoryID AND
-					        	(nameF = '$search' OR nameL = '$search' OR title LIKE '%$search%' OR description LIKE '%$search%' OR publisher LIKE '%$search%')
-					        ORDER BY title";
-				}
-
-				if(empty($search)) {
-					$sql = "SELECT ISBN, title, description
-					  		FROM bookdescriptions
-					  		ORDER BY title";
-				}
-
-				if(!empty($catID)) {
-					$sql = "SELECT DISTINCT a.ISBN, a.title, a.description, b.ISBN, b.AuthorID, c.AuthorID, c.nameF, c.nameL, d.CategoryID, e.CategoryID, e.ISBN
-					 	    FROM bookdescriptions a, bookauthorsbooks b, bookauthors c, bookcategories d, bookcategoriesbooks e
-					        WHERE a.ISBN = b.ISBN AND b.ISBN = e.ISBN AND d.CategoryID = '$catID' AND e.CategoryID = '$catID' AND b.AuthorID = c.AuthorID
-					        ORDER BY title";
-				}
-
-				$result = mysqli_query($link, $sql)
-						or die('SQL syntax error: ' . mysqli_error($link));
-
-				$row = mysqli_fetch_array($result);
 			?>
-			<!--Close Header-->
-
-			<div class="bodyContainer">
+			<div id="templatemo_content">
 				
-				<?php
-					include 'resources/includes/leftColumn.html';
-				?>
+			<?php
+				include 'resources/includes/leftColumn.html';
+			?>
 
-				<div class="right">
-					<?php
-						$old = 0;
-
-						while ($row = mysqli_fetch_array($result)) {
-							$short = substr($row['description'], 0, 500) . " ... <a href='ProductPage.php?isbn=$row[ISBN]'> <br> [More] </a>";
-							$authors = fListAuthors($link, $row['ISBN']);
-
-							if($old !== $row['ISBN']) {
-							echo "<div class='indexBook'>
-									<div class='title'> <a href='ProductPage.php?isbn=$row[ISBN]'> $row[title] </a> </div>
-									<div class='author'> $authors </div>
-									<div class='image'> <a href='ProductPage.php?isbn=$row[ISBN]'> <img src='https://baldochi.unifei.edu.br/COM222/trabfinal/imagens/$row[ISBN].01.MZZZZZZZ.jpg' /> </a> </div> 
-									<div class='detail'> $short </div>
-								  </div>"; }
-
-							$old = $row['ISBN'];
-						}
-					?>
+			<div id="templatemo_content_right">
+			<?php
+				      //List records
+			@$catName = $_GET['catName']; 
+			@$search = $_GET['search']; 
+			if (!empty($catName)){
+			   $search = $catName;
+			}
+  
+			$sql = "SELECT DISTINCT d.isbn, title, description, price
+			    FROM bookauthors a, bookauthorsbooks ba, bookdescriptions d,
+			    bookcategoriesbooks cb, bookcategories c
+			    WHERE a.AuthorID = ba.AuthorID
+			    AND ba.ISBN = d.ISBN
+			    AND d.ISBN = cb.ISBN
+			    AND c.CategoryID = cb.CategoryID
+			    AND (CategoryName = '$search'
+			    OR title LIKE '%$search%'
+			    OR description LIKE '%$search%'
+			    OR publisher LIKE '%$search%' 
+			    OR concat_ws(' ', nameF, nameL, nameF) LIKE '%$search%' )
+			    ORDER BY title";
+			  
+			$result = mysqli_query($link, $sql)
+			  or die('SQL syntax error: ' . mysqli_error($link));
+			  
+		
+			echo "<center><h1>Resultado ".mysqli_num_rows($result)."</h1></center>";
+         
+			while ($row = mysqli_fetch_array($result)) {
+				//Field names are case sensitive and must match
+				//the case used in sql statement
+				$title = $row['title'];
+				$ISBN = $row['isbn'];
+				$description = $row['description'];
+				$authors = fListAuthors($link, $ISBN);
+				$short = substr($row['description'], 0, 80).'...';
+				echo  "<div class='templatemo_product_box'>
+									<h1><a href='ProductPage.php?isbn=".$ISBN."'>". $title."</a> <span>(".$authors.")</span></h1>
+									<a href='ProductPage.php?isbn=".$ISBN."'> <img src='resources/uploads/".$ISBN.".01.MZZZZZZZ.jpg' height='150' width='100'/> </a>
+									<div class='product_info'>
+										<p> ".$short." </p>
+										<div class='buy_now_button'><a href='shoppingCart.php?addISBN=".$ISBN."'>Comprar</a></div>
+                    					<div class='detail_button'><a href='ProductPage.php?isbn=".$ISBN."'>Detalhe</a></div>
+                    				</div>
+					                <div class='cleaner'>&nbsp;</div>
+					            </div><br>
+					            <div class='cleaner_with_width'>&nbsp;</div><br>
+								  ";
+			}
+         
+   
+      
+      ?>
 				</div>
-			</div>
 
 			<!--Open Footer-->
 			<?php
